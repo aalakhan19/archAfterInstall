@@ -74,10 +74,13 @@ git clone https://github.com/aalakhan19/sxhkdConfig
 cp sxhkdConfig/sxhkdrc sxhkdrc
 
 # setup light
-cd sudo pacman -S light
+cd 
+sudo pacman -S light
 sudo touch /etc/udev/rules.d/backlight.rules
-sudo sh -c 'echo ACTION==\"add\", SUBSYSTEM==\"backlight\", KERNEL==\"<vendor>\", RUN+=\"/bin/chgrp video /sys/class/backlight/%k/brightness\" >> /etc/udev/rules.d/backlight.rules'
-sudo sh -c 'echo ACTION==\"add\", SUBSYSTEM==\"backlight\", KERNEL==\"<vendor>\", RUN+=\"/bin/chmod g+w /sys/class/backlight/%k/brightness\" >> /etc/udev/rules.d/backlight.rules'
+sudo sh -c 'echo ACTION==\"add\", SUBSYSTEM==\"backlight\", KERNEL==\"intel_backlight\", RUN+=\"/bin/chgrp video /sys/class/backlight/%k/brightness\" >> /etc/udev/rules.d/backlight.rules'
+sudo sh -c 'echo ACTION==\"add\", SUBSYSTEM==\"backlight\", KERNEL==\"intel_backlight\", RUN+=\"/bin/chmod g+w /sys/class/backlight/%k/brightness\" >> /etc/udev/rules.d/backlight.rules'
+sudo usermod -aG video aala
+
 
 # install font
 sudo pacman -S ttf-liberation noto-fonts
@@ -86,7 +89,7 @@ sudo pacman -S ttf-liberation noto-fonts
 cd
 pacman -S gnome-keyring
 echo $'eval $(/usr/bin/gnome-keyring-daemon --start)\nexport SSH_AUTH_SOCK' >> .xinitrc
-echo $'xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Natural Scrolling Enabled 1"\nxinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Tapping Enabled 1"' >> .xinitrc
+echo $'xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Natural Scrolling Enabled" "1"\nxinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Tapping Enabled" "1"' >> .xinitrc
 echo "exec dwm" >> .xinitrc
 
 sudo reboot
