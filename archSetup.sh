@@ -35,7 +35,12 @@ cd
 yay -S ${AP[@]}
 
 # install xserver
-sudo pacman -S xorg xorg-xinit
+sudo pacman -S xorg xorg-xinit xf86-video-intel
+
+# fix screen tearing
+sudo mkdir -p /etc/X11/xorg.conf.d
+sudo touch /etc/X11/xorg.conf.d/20-intel.conf
+echo $'Section "Device"\n   Identifier "Intel Graphics"\n   Driver "intel"\n   Option "TearFree" "true"\nEndSection' | sudo tee -a /etc/X11/xorg.conf.d/20-intel.conf >/dev/null
 
 # install dwm
 mkdir -p suckless
@@ -43,6 +48,7 @@ cd suckless
 git clone https://github.com/aalakhan19/dwm
 cd dwm
 sudo make clean install
+sudo pacman -S dmenu upower
 cd
 
 # autostart dwm on login
@@ -91,5 +97,8 @@ pacman -S gnome-keyring
 echo $'eval $(/usr/bin/gnome-keyring-daemon --start)\nexport SSH_AUTH_SOCK' >> .xinitrc
 echo $'xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Natural Scrolling Enabled" "1"\nxinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Tapping Enabled" "1"' >> .xinitrc
 echo "exec dwm" >> .xinitrc
+
+# set dark theme
+sudo pacman -S lxappearance qt5ct arc-gtk-theme
 
 sudo reboot
