@@ -70,6 +70,7 @@ cd suckless
 git clone https://git.suckless.org/st
 cd st
 sudo make clean install
+yay -S nerd-fonts-fira-code
 
 # setup sxhkd
 cd
@@ -93,12 +94,27 @@ sudo pacman -S ttf-liberation noto-fonts
 
 # setup .xinitrc
 cd
-pacman -S gnome-keyring
+pacman -S gnome-keyring libsecret
 echo $'eval $(/usr/bin/gnome-keyring-daemon --start)\nexport SSH_AUTH_SOCK' >> .xinitrc
 echo $'xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Natural Scrolling Enabled" "1"\nxinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Tapping Enabled" "1"' >> .xinitrc
 echo "exec dwm" >> .xinitrc
 
 # set dark theme
 sudo pacman -S lxappearance qt5ct arc-gtk-theme
+
+# setup nvim
+cd .config
+git clone https://github.com/aalakhan19/nvim
+cd nvim
+mkdir autoload
+cd autoload
+curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim --output plug.vim
+
+# set timezone
+timedatectl set-timezone Europe/Berlin
+
+# install zsh
+sudo pacman -S zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 sudo reboot
