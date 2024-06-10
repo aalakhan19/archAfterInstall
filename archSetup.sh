@@ -1,14 +1,14 @@
 #!/bin/sh
 
 #variables
-PP=("firefox" "discord" "nitrogen" "polkit" "neovim" "pulseaudio")
-AP=("anki-official-binary-bundle" "typora" "spotify" "iwgtk" "visual-studio-code-bin" "github-desktop-bin")
+# PP=("firefox" "discord" "nitrogen" "polkit" "neovim" "pulseaudio")
+# AP=("anki-official-binary-bundle" "typora" "spotify" "iwgtk" "visual-studio-code-bin" "github-desktop-bin")
 
 # update base system
 sudo pacman -Syu
 
 # install pacman programms
-sudo pacman -S ${PP[@]}
+# sudo pacman -S ${PP[@]}
 
 # disable beep
 sudo touch /etc/modprobe.d/nobeep.conf
@@ -32,7 +32,7 @@ rm -rf yay-bin
 cd
 
 # install yay programms
-yay -S ${AP[@]}
+# yay -S ${AP[@]}
 
 # install xserver
 sudo pacman -S xorg xorg-xinit xf86-video-intel
@@ -103,18 +103,18 @@ echo "exec dwm" >> .xinitrc
 sudo pacman -S lxappearance qt5ct arc-gtk-theme
 
 # setup nvim
-cd .config
-git clone https://github.com/aalakhan19/nvim
-cd nvim
-mkdir autoload
-cd autoload
-curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim --output plug.vim
+# cd .config
+# git clone https://github.com/aalakhan19/nvim
+# cd nvim
+# mkdir autoload
+# cd autoload
+# curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim --output plug.vim
 
 # set timezone
 timedatectl set-timezone Europe/Berlin
 
 # install zsh
-sudo pacman -S zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# sudo pacman -S zsh
+# sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 sudo reboot
